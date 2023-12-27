@@ -11,4 +11,5 @@ public abstract class Bullet
     }
 
     public abstract void update(float deltaTime);
+    public abstract void start();
 }

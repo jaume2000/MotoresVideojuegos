@@ -25,9 +25,12 @@ public class RTDESKEntity : MonoBehaviour
     public MessageManager MailBox;
     public RTDESKEngine RTDESKEngineScript;
 
-    void Start()
+    GameObject RTDESKEngine;
+
+    void Awake()
     {
-        RTDESKEngineScript = GameObject.Find(RTDESKEngine.Name).GetComponent<RTDESKEngine>();
+        RTDESKEngine = GameObject.Find("RTDESK Engine");
+        RTDESKEngineScript = RTDESKEngine.GetComponent<RTDESKEngine>();
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -42,4 +45,9 @@ public class RTDESKEntity : MonoBehaviour
         return obj.GetComponent<RTDESKEntity>().MailBox;
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public RTDESKInputManager GetRTDESKInputManager()
+    {
+        return RTDESKEngine.GetComponent<RTDESKInputManager>();
+    }
 }

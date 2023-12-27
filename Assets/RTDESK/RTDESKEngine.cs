@@ -38,6 +38,9 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 
 //The component that creates an internal RTDESK Engine
+// CubeReceiveMessage requires the GameObject to have a RTDESKEntity component
+[RequireComponent(typeof(RTDESKEntity))]
+[RequireComponent(typeof(RTDESKInputManager))]
 public class RTDESKEngine : MonoBehaviour
 {
 	private const int RTDESK_VERSION	= 2;
@@ -48,6 +51,7 @@ public class RTDESKEngine : MonoBehaviour
 
 	private RTDESKMsgPool		MsgPool;
 	private RTDESKMsgDispatcher MsgDispatcher;
+	private RTDESKInputManager  InputManager;
 
 	public enum Actions
     {
@@ -77,10 +81,16 @@ public class RTDESKEngine : MonoBehaviour
 
 		//Now set the timer manager with the default clocks set up. Now the MsgDispatcher can select the one it needs
 		MsgDispatcher.ResetClocks();
+		//Assign the "listener" to the normalized component RTDESKEntity. Every gameObject that wants to receive a message must have a public mailbox
+		GetComponent<RTDESKEntity>().MailBox = ReceiveMessage;
+		InputManager = GetComponent<RTDESKInputManager>();
 	}
 
-    void Start()
+	void Start()
     {
+		//This is the first message in the time stamped queue to manage
+		//The aim is to synchronize every event to the real time just before any event management
+		//to avoid start acceleration to match the simulation time to the real time if this synchronization is not done
 		SendMsg(MsgPool.PopMsg((int)Actions.SynchSim2RealTime), gameObject, ReceiveMessage);
 	}
 
@@ -98,17 +108,23 @@ public class RTDESKEngine : MonoBehaviour
             {
 				Msg.Receiver(Msg);
 			}
-			catch (MissingReferenceException r)
+			catch (Exception e)
             {
 				//Possibly, the object receiving this message has been destroyed and do not exist. Go on
 				Debug.Log("Possibly, the receiver object does not exist");
-				Debug.Log(r.Message);
-				if (null != Msg) PushMsg(Msg);
+				Debug.Log(e.Message);
+				if (null != Msg)
+				{
+					Debug.Log("Pushing back the message to the pool");
+					Debug.Log("Sender: " + Msg.Sender + " Type: " + Msg.Type);
+                    PushMsg(Msg);
+                }
+				else Debug.Log("Null message");
             }			
 		}
 	}
 
-	void OnDestroy(){Debug.Log("Destroying");}
+	void OnDestroy(){Debug.Log("Destroying RTDESK Engine");}
 
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	bool ObjectAdmitsMessages(GameObject o){return null != o.GetComponent<RTDESKEntity>();}
@@ -145,7 +161,12 @@ public class RTDESKEngine : MonoBehaviour
 	}
 
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+#nullable enable
 	public static string? GetName<TEnum>(TEnum value) where TEnum : struct	{ return Enum.GetName(typeof(TEnum), value); }
+#nullable disable
+
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public RTDESKInputManager GetInputManager(){ return InputManager; }
 
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static int AmountOf<TEnum>() where TEnum : struct { return Enum.GetNames(typeof(TEnum)).Length; }

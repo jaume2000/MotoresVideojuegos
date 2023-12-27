@@ -5,7 +5,7 @@
  *
  * Prefix: RTDM_
 
- * @Author: Dr. Ram√≥n Moll√° Vay√°
+ * @Author: Dr. RamÛn Moll· Vay·
  * @Date:	11/2022
  * @Version: 2.0
  *
@@ -57,7 +57,7 @@ public class MsgContent
 	public HRT_Time				AbsoluteTime;	///< It contains the Absolute message time to be dispatched
 
 	public GameObject			Sender;		///<GameObject that sends the message
-	public MessageManager	Receiver;	///<Script that receives the message
+	public MessageManager		Receiver;	///<Script that receives the message
 	public MsgContent			NextMsg;	///<For enqueuing the msg into the messages pool. FIFO/LIFO queue	
 
 	public MsgContent(int T) { Free(); Type = T;}

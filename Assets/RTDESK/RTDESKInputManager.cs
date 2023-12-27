@@ -5,7 +5,7 @@
  *
  * Prefix: RTDESKIM_
 
- * @Author:	Dr. Ramï¿½n Mollï¿½ Vayï¿½
+ * @Author:	Dr. Ramón Mollá Vayá
  * @Date:	12/2022
  * @Version: 2.0
  *
@@ -59,20 +59,32 @@ public class RTDESKInputManager : MonoBehaviour
 		Debug.Log("Engine name " + Engine.name);
 	}
 
+	private void sendMsg(KeyCode c, KeyState ks, MessageManager RMM)
+	{
+		RTDESKInputMsg IM = (RTDESKInputMsg)Engine.PopMsg((int)RTDESKMsgTypes.Input);
+		IM.c = c;
+		IM.s = ks;
+		IM.Sender	= gameObject;
+		IM.Receiver = RMM;
+		IM.AbsoluteTime = HRTimer.HRT_INMEDIATELY;
+		Engine.SendMsg(IM, HRTimer.HRT_INMEDIATELY);
+	}
+
+	/**
+	* @fn void Update()
+	* The system checks for the state of the sensitive keys. It reports for the keydown and keyup events to the gameobjects that want to know the state of those keys
+	* If an object receives a keydown but not a keyup, it the key is in the pressed state meanwhile
+	*/
 	// Update is called once per frame
 	void Update()
 	{
 		for (int i = 0; i < ActiveInputs.Count; i++)
 			if (Input.GetKeyDown(ActiveInputs.Keys[i]))
 				foreach (MessageManager RMM in ActiveInputs.Values[i])
-				{
-					RTDESKInputMsg IM	= (RTDESKInputMsg)Engine.PopMsg((int)RTDESKMsgTypes.Input);
-					IM.c				= ActiveInputs.Keys[i];
-					IM.Sender			= gameObject;
-					IM.Receiver			= RMM;
-					IM.AbsoluteTime		= HRTimer.HRT_INMEDIATELY;
-					Engine.SendMsg (IM,	  HRTimer.HRT_INMEDIATELY);
-				}
+					sendMsg(ActiveInputs.Keys[i], KeyState.DOWN, RMM);
+			else if (Input.GetKeyUp(ActiveInputs.Keys[i]))
+				foreach (MessageManager RMM in ActiveInputs.Values[i])
+					sendMsg(ActiveInputs.Keys[i], KeyState.UP, RMM);
 	}
 
 	/**
@@ -90,7 +102,7 @@ public class RTDESKInputManager : MonoBehaviour
 			LRM.Add(Rmethod);
 			ActiveInputs.Add(Kc, LRM);
 		}
-		Debug.Log("Registrando otro cï¿½digo");
+		Debug.Log("Registrando código de teclado: " + Kc);
 	}
 
 	/**

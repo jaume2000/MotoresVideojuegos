@@ -5,7 +5,7 @@
  *
  * Prefix: RTDM_
 
- * @Author: Dr. Ram√≥n Moll√° Vay√°
+ * @Author: Dr. RamÛn Moll· Vay·
  * @Date:	11/2022
  * @Version: 2.0
  *
@@ -39,13 +39,20 @@ using UnityEngine;
 
 public enum RTDESKMsgTypes
 {
+	Test,	//For testing purposes anywhere
 	Input,	//Input Manager message
 	RTDESK_MAX_MsgTypes
 };
 
+public enum KeyState
+{
+	DOWN,   //The key is pushed down 
+	UP		//The key is released
+}
 public class RTDESKInputMsg : MsgContent
 {
-	public KeyCode c;	//The code read by the input manager
+	public KeyCode	c;   //The code read by the input manager
+	public KeyState s;	 //The state of the key. May be pushed down o released
 }
 
 /// ACHTUNG: do not touch anything above
@@ -69,7 +76,7 @@ public class ObjectMsg : MsgContent
 	public ObjectMsg() { Type = (int)UserMsgTypes.Object; }
 }
 
-//Translaci√≥n, Rotaci√≥n y Escala
+//TranslaciÛn, RotaciÛn y Escala
 public class TRE : MsgContent
 {
 	public Vector3 pos, rot, esc;

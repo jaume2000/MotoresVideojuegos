@@ -17,4 +17,8 @@ public class LinearBullet : Bullet
     public override void update(float deltaTime){
         this.bullet.transform.Translate(new Vector2(dir_x,dir_y) * vel * deltaTime);
     }
+
+    public override void start(){
+        
+    }
 }

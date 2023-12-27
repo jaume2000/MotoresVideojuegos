@@ -10,8 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4386269697352235747}
   - component: {fileID: -8395957779787853997}
-  - component: {fileID: 4386269697352235744}
-  - component: {fileID: 4306563114650631537}
   m_Layer: 0
   m_Name: RTDESK Engine
   m_TagString: Untagged
@@ -43,31 +41,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 4386269697352235745}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd4c31eab377caf41abb66f25e0ffcda, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RTDESKEngineScript: {fileID: 0}
---- !u!114 &4386269697352235744
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4386269697352235745}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1de550ab5ef201e4e8be93a43f4b3108, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4306563114650631537
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4386269697352235745}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f6a30c32da6d5e4a965568b0277a5a2, type: 3}
+  m_Script: {fileID: 11500000, guid: 2dd5e2488a9d63b438ab4409b250b4fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

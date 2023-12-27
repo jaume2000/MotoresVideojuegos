@@ -8,11 +8,16 @@ public class movement : MonoBehaviour
     
     public Vector2 dir = new Vector2(0, 0);
     public float speed;
+    public static movement player;
+
+    public Collider2D collider;
     
     private void Awake()
     {
         //Asignar el "listener" al componente normalizado que contienen todos los objetos que pueden recibir mensajes
         GetComponent<RTDESKEntity>().MailBox = ReceiveMessage;
+        collider = GetComponent<Collider2D>();
+        player = this;
     }
     
     // Start is called before the first frame update
@@ -37,7 +42,7 @@ public class movement : MonoBehaviour
 
     void ReceiveMessage(MsgContent Msg)
     {
-        Debug.Log(((RTDESKInputMsg)Msg).c);
+        Debug.Log(((RTDESKInputMsg)Msg).c + " " + ((RTDESKInputMsg)Msg).s);
     }
     
     void MovementManager(KeyCode key, int action = 0)
@@ -59,5 +64,10 @@ public class movement : MonoBehaviour
                 dir.x = 1;
                 break;
         }
+    }
+
+    public void collided_with_bullet(){
+        //Este método se llama desde BulletGameObject.cs, detecta la colisión y ejecuta este metodo.
+        Debug.log("Collisión con bullet.")
     }
 }

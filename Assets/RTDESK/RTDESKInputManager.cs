@@ -5,7 +5,7 @@
  *
  * Prefix: RTDESKIM_
 
- * @Author:	Dr. Ramón Mollá Vayá
+ * @Author:	Dr. Ramï¿½n Mollï¿½ Vayï¿½
  * @Date:	12/2022
  * @Version: 2.0
  *
@@ -90,7 +90,7 @@ public class RTDESKInputManager : MonoBehaviour
 			LRM.Add(Rmethod);
 			ActiveInputs.Add(Kc, new List<MessageManager>());
 		}
-		Debug.Log("Registrando otro código");
+		Debug.Log("Registrando otro cï¿½digo");
 	}
 
 	/**

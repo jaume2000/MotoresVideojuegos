@@ -5,7 +5,7 @@
  *
  * Prefix: RTDM_
 
- * @Author: Dr. RamÛn Moll· Vay·
+ * @Author: Dr. Ram√≥n Moll√° Vay√°
  * @Date:	11/2022
  * @Version: 2.0
  *
@@ -69,7 +69,7 @@ public class ObjectMsg : MsgContent
 	public ObjectMsg() { Type = (int)UserMsgTypes.Object; }
 }
 
-//TranslaciÛn, RotaciÛn y Escala
+//Translaci√≥n, Rotaci√≥n y Escala
 public class TRE : MsgContent
 {
 	public Vector3 pos, rot, esc;

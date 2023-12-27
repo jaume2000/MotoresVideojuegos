@@ -68,6 +68,6 @@ public class movement : MonoBehaviour
 
     public void collided_with_bullet(){
         //Este método se llama desde BulletGameObject.cs, detecta la colisión y ejecuta este metodo.
-        Debug.log("Collisión con bullet.")
+        Debug.Log("Collisión con bullet.");
     }
 }

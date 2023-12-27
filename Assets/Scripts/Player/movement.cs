@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(RTDESKEntity))]
@@ -29,19 +30,34 @@ public class movement : MonoBehaviour
         IM.RegisterKeyCode(ReceiveMessage, KeyCode.D);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        // control player with wasd keys
-        dir.x = Input.GetKey(KeyCode.A) ? -1 : Input.GetKey(KeyCode.D) ? 1 : 0;
-        dir.y = Input.GetKey(KeyCode.S) ? -1 : Input.GetKey(KeyCode.W) ? 1 : 0;
-        
-        // move player
         transform.Translate(dir.normalized * speed * Time.deltaTime);
     }
-    
+
     void ReceiveMessage(MsgContent Msg)
     {
-        Debug.Log("patata");
+        Debug.Log(((RTDESKInputMsg)Msg).c);
+    }
+    
+    void MovementManager(KeyCode key, int action = 0)
+    {
+        dir.x = 0;
+        dir.y = 0;
+        switch (key)
+        {
+            case KeyCode.W:
+                dir.y = 1;
+                break;
+            case KeyCode.A:
+                dir.x = -1;
+                break;
+            case KeyCode.S:
+                dir.y = -1;
+                break;
+            case KeyCode.D:
+                dir.x = 1;
+                break;
+        }
     }
 }

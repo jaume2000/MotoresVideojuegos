@@ -5,7 +5,7 @@
  *
  * Prefix: RTDM_
 
- * @Author: Dr. RamÛn Moll· Vay·
+ * @Author: Dr. Ram√≥n Moll√° Vay√°
  * @Date:	11/2022
  * @Version: 2.0
  *

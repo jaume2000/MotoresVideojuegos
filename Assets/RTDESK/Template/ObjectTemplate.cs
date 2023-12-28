@@ -5,7 +5,7 @@
  *
  * Prefix: OT_
 
- * @Author: Dr. Ramón Mollá Vayá
+ * @Author: Dr. Ramï¿½n Mollï¿½ Vayï¿½
  * @Date:	12/2022
  * @Version: 2.0
  *
@@ -65,7 +65,7 @@ public class ObjectTemplate : MonoBehaviour
         IM.RegisterKeyCode(ReceiveMessage, KeyCode.LeftArrow);
         IM.RegisterKeyCode(ReceiveMessage, KeyCode.RightArrow);
 
-        //Debug.Log("Solicitud de Acción por cubo");
+        //Debug.Log("Solicitud de Acciï¿½n por cubo");
         //Get a new message to activate a new action in the object
         ActMsg = (Action)Engine.PopMsg((int)UserMsgTypes.Action);
         //Update the content of the message sending and activation 
@@ -139,7 +139,7 @@ public class ObjectTemplate : MonoBehaviour
                 {
                     switch ((int)a.action)
                     {
-                        case (int)UserActions.GetSteady: //Stop the movement of the object
+                        case (int)UserActions.GetSteady: //Stop the player of the object
                             break;
                         case (int)UserActions.Move:
                             break;

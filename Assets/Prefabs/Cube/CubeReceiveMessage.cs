@@ -5,7 +5,7 @@
  *
  * Prefix: CRM_
 
- * @Author: Dr. Ramón Mollá Vayá
+ * @Author: Dr. Ramï¿½n Mollï¿½ Vayï¿½
  * @Date:	11/2022
  * @Version: 2.0
  *
@@ -90,19 +90,19 @@ public class CubeReceiveMessage : MonoBehaviour
         IM.RegisterKeyCode(ReceiveMessage, KeyCode.LeftArrow);
         IM.RegisterKeyCode(ReceiveMessage, KeyCode.RightArrow);
 
-        //Debug.Log("Solicitud de Posición");
+        //Debug.Log("Solicitud de Posiciï¿½n");
         //Get a new message to change position
         PosMsg = (Transform)Engine.PopMsg((int)UserMsgTypes.Position);
         //Update the content of the message
         PosMsg.V3 = speed; // new Vector3(0.0005f, 0.0002f, 0.001f);
 
-        //Debug.Log("Solicitud de rotación");
+        //Debug.Log("Solicitud de rotaciï¿½n");
         //Get a new message to change position
         RotMsg = (Transform)Engine.PopMsg((int)UserMsgTypes.Rotation);
           //Update the content of the message
         RotMsg.V3 = new Vector3(0.01f, 0.011f, 0.015f);
 
-        //Debug.Log("Solicitud de Acción por cubo");
+        //Debug.Log("Solicitud de Acciï¿½n por cubo");
         //Get a new message to activate a new action in the object
         ActMsg = (Action)Engine.PopMsg((int)UserMsgTypes.Action);
         //Update the content of the message sending and activation 
@@ -165,7 +165,7 @@ public class CubeReceiveMessage : MonoBehaviour
                     {
                         transform.Translate(p.V3);
                         Engine.SendMsg(Msg, tenMillis);
-                        //Este mensaje se reutiliza para volver a mandarse a sí mismo. No hace falta devolver al pool empleando PutMsg(Msg);
+                        //Este mensaje se reutiliza para volver a mandarse a sï¿½ mismo. No hace falta devolver al pool empleando PutMsg(Msg);
                     }
                     else Engine.PushMsg(Msg);
                 }
@@ -216,7 +216,7 @@ public class CubeReceiveMessage : MonoBehaviour
                             Color randomColor = new Color(Random.value, Random.value, Random.value, 1.0f);
                             renderComponent.material.SetColor("_Color", randomColor);
                             Engine.SendMsg(Msg, (HRT_Time)(((double)oneSecond)*(1-Random.value*0.5d)));
-                            //Este mensaje se reutiliza para volver a mandarse a sí mismo. No hace falta devolver al pool empleando PutMsg(Msg);
+                            //Este mensaje se reutiliza para volver a mandarse a sï¿½ mismo. No hace falta devolver al pool empleando PutMsg(Msg);
                             break;
                         case (int)CubeActions.Start:
                             //We have to start the Cube behaviour
@@ -230,7 +230,7 @@ public class CubeReceiveMessage : MonoBehaviour
                 {
                     switch ((int)a.action)
                     {
-                        case (int)UserActions.GetSteady: //Stop the movement of the object
+                        case (int)UserActions.GetSteady: //Stop the player of the object
                             state = CubeStates.Steady;
                             break;
                         case (int)UserActions.Move:

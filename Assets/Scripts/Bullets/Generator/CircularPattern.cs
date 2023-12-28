@@ -12,12 +12,12 @@ public class CircularPattern : BulletPattern
     private float total_phase = 0;
     public float bullet_velocity = 5;
     public int bullet_count = 5;
+    public int survival_time = 5;
 
     protected float time_transcured = 0;
 
     private RTDESKEngine engine;
     private RTDESKEntity entity;
-    private MessageManager myMM;
 
     private void Awake()
     {
@@ -29,12 +29,11 @@ public class CircularPattern : BulletPattern
     {
         entity = GetComponent<RTDESKEntity>();
         engine = entity.RTDESKEngineScript;
-        myMM = entity.MailBox;
 
 
         ObjectMsg Msg  = (ObjectMsg)engine.PopMsg((int)UserMsgTypes.Object);
         Msg.o = null;
-        engine.SendMsg(Msg, gameObject, myMM, engine.ms2Ticks(awaiting_time*500));
+        engine.SendMsg(Msg, gameObject, MailBox, engine.ms2Ticks(awaiting_time*500));
         
     }
 
@@ -44,6 +43,7 @@ public class CircularPattern : BulletPattern
         for(int i=0; i< bullet_count; i++){
             GameObject lb = Instantiate(this.bullet_prefabs[0], transform.position, Quaternion.identity);
             BulletGameObject bgo = lb.GetComponent<BulletGameObject>();
+            bgo.setSurvivalTIme(survival_time);
             float angle = 2*Mathf.PI/bullet_count * i + total_phase/180*Mathf.PI;
             bgo.setBehaviour(new LinearBullet(lb, Mathf.Cos(angle), Mathf.Sin(angle), bullet_velocity));
         }
@@ -59,7 +59,9 @@ public class CircularPattern : BulletPattern
         {
             //Queremos generar N bullets.
             case (int)UserMsgTypes.Object:
-                loop();
+                if(!player.gameover){
+                    loop();
+                }
                 break;
 
             default:
@@ -74,6 +76,6 @@ public class CircularPattern : BulletPattern
 
         ObjectMsg Msg  = (ObjectMsg)engine.PopMsg((int)UserMsgTypes.Object);
         Msg.o = null;
-        engine.SendMsg(Msg, gameObject, myMM, engine.ms2Ticks(awaiting_time*1000));
+        engine.SendMsg(Msg, gameObject, MailBox, engine.ms2Ticks(awaiting_time*1000));
     }
 }

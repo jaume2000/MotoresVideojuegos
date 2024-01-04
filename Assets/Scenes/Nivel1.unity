@@ -233,6 +233,10 @@ PrefabInstance:
       value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2734917578754557764, guid: 9452b7c2ed743514f853277edb5b32fc, type: 3}
+      propertyPath: bullet_velocity
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2734917578754557764, guid: 9452b7c2ed743514f853277edb5b32fc, type: 3}
       propertyPath: mapBorderMultiplier
       value: 2
       objectReference: {fileID: 0}
@@ -250,7 +254,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5087853516292620464, guid: 9452b7c2ed743514f853277edb5b32fc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 5087853516292620464, guid: 9452b7c2ed743514f853277edb5b32fc, type: 3}
       propertyPath: m_LocalPosition.y
@@ -885,11 +889,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7170536167376125822, guid: 9452b7c2ed743514f853277edb5b32fc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -20
+      value: -19
       objectReference: {fileID: 0}
     - target: {fileID: 7170536167376125822, guid: 9452b7c2ed743514f853277edb5b32fc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 7170536167376125822, guid: 9452b7c2ed743514f853277edb5b32fc, type: 3}
       propertyPath: m_LocalPosition.z

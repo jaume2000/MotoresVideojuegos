@@ -6,26 +6,29 @@ public class BulletGameObject: MonoBehaviour
 {
     public Bullet behaviour;
 
-    public static float UPDATE_DELTA = 10f;
+    public static float UPDATE_DELTA = 50f;
 
     private RTDESKEngine engine;
     private RTDESKEntity entity;
     
     private bool destroy = false;
-    private Collider2D collider;
-    private float survival_time = 1;
-    
+    private Collider2D my_collider;
+
+    private float mapBorderMultiplier = 1;
 
     public void setBehaviour(Bullet behaviour){
         this.behaviour = behaviour;
     }
 
+    /*
     public void setSurvivalTIme(float t){
         survival_time = t;
     }
+    */
 
-    private float survivalTime = 4f;
-
+    public void setMapBorderMultiplier(float m){
+        mapBorderMultiplier = m;
+    }
     void Awake(){
         //Asignar el "listener" al componente normalizado que contienen todos los objetos que pueden recibir mensajes
         GetComponent<RTDESKEntity>().MailBox = MailBox;
@@ -34,32 +37,49 @@ public class BulletGameObject: MonoBehaviour
     void Start(){
         entity = GetComponent<RTDESKEntity>();
         engine = entity.RTDESKEngineScript;
-        collider = gameObject.GetComponent<Collider2D>();
+        my_collider = gameObject.GetComponent<Collider2D>();
 
         Action Msg  = (Action)engine.PopMsg((int)UserMsgTypes.Action);
         Msg.action = (int)UserActions.Move;
-        engine.SendMsg(Msg, gameObject, MailBox, engine.ms2Ticks(player.UPDATE_DELTA)/*HRTimer.HRT_INMEDIATELY*/);
+        engine.SendMsg(Msg, gameObject, MailBox, engine.ms2Ticks(Player.UPDATE_DELTA)/*HRTimer.HRT_INMEDIATELY*/);
 
+        /*
         Action Msg2  = (Action)engine.PopMsg((int)UserMsgTypes.Action);
         Msg2.action = (int)UserActions.End;
         engine.SendMsg(Msg2, gameObject, MailBox, engine.ms2Ticks(survival_time*1000));
+        */
+    }
+
+    private bool isOutsideOfMap(){
+        return (
+            transform.position.x > Player.i.mapBorder[0].x * mapBorderMultiplier ||
+            transform.position.x < Player.i.mapBorder[1].x * mapBorderMultiplier ||
+            transform.position.y > Player.i.mapBorder[0].y * mapBorderMultiplier ||
+            transform.position.y < Player.i.mapBorder[1].y * mapBorderMultiplier
+        );
     }
 
     private void move()
     {
+        
+        
+
+        if(isOutsideOfMap()){
+            destroy=true;
+        }
         if(destroy){
             Object.Destroy(gameObject);
             return;
         }
-        behaviour.update(player.UPDATE_DELTA/1000);
+        behaviour.update(Player.UPDATE_DELTA/1000);
 
-        if(player.i.collider.IsTouching(collider)){
-            player.i.collided_with_bullet();
+        if(Player.i.my_collider.IsTouching(my_collider)){
+            Player.i.collided_with_bullet();
         }
 
         Action Msg  = (Action)engine.PopMsg((int)UserMsgTypes.Action);
         Msg.action = (int)UserActions.Move;
-        engine.SendMsg(Msg, gameObject, MailBox, engine.ms2Ticks(player.UPDATE_DELTA)/*HRTimer.HRT_INMEDIATELY*/);
+        engine.SendMsg(Msg, gameObject, MailBox, engine.ms2Ticks(Player.UPDATE_DELTA)/*HRTimer.HRT_INMEDIATELY*/);
     }
 
     void MailBox (MsgContent Msg)
@@ -72,7 +92,7 @@ public class BulletGameObject: MonoBehaviour
                 switch (a.action)
                 {
                     case (int)UserActions.Move:
-                        if(!player.gameover){
+                        if(!Player.gameover){
                             move();
                         }
                         break;

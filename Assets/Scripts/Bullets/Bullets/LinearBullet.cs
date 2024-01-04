@@ -5,17 +5,17 @@ using UnityEngine;
 public class LinearBullet : Bullet
 {
 
-    private float dir_x, dir_y, vel;
+    private Vector2 dir;
+    private float vel;
     
-    public LinearBullet(GameObject obj, float dir_x, float dir_y, float vel) : base(obj){
+    public LinearBullet(GameObject obj, Vector2 dir, float vel) : base(obj){
         
-        this.dir_x = dir_x;
-        this.dir_y = dir_y;
+        this.dir = dir;
         this.vel = vel;
     }
 
     public override void update(float deltaTime){
-        this.bullet.transform.Translate(new Vector2(dir_x,dir_y) * vel * deltaTime);
+        this.bullet.transform.Translate(dir * vel * deltaTime);
     }
 
     public override void start(){

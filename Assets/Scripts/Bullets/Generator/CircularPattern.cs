@@ -24,9 +24,10 @@ public class CircularPattern : BulletPattern
         for(int i=0; i< bullet_count; i++){
             GameObject lb = Instantiate(this.bullet_prefabs[0], transform.position, Quaternion.identity);
             BulletGameObject bgo = lb.GetComponent<BulletGameObject>();
-            bgo.setSurvivalTIme(survival_time);
+            //bgo.setSurvivalTIme(survival_time);
             float angle = 2*Mathf.PI/bullet_count * i + total_phase/180*Mathf.PI;
-            bgo.setBehaviour(new LinearBullet(lb, Mathf.Cos(angle), Mathf.Sin(angle), bullet_velocity));
+            bgo.setBehaviour(new LinearBullet(lb, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)), bullet_velocity));
+            bgo.setMapBorderMultiplier(mapBorderMultiplier);
         }
 
         total_phase+=phase_shift;

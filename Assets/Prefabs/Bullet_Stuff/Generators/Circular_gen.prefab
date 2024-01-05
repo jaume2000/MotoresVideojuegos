@@ -9,8 +9,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3822283647361304233, guid: cec3df0a3b19cd33e9f79a8efc16dc5f, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3822283647361304233, guid: cec3df0a3b19cd33e9f79a8efc16dc5f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3822283647361304233, guid: cec3df0a3b19cd33e9f79a8efc16dc5f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3822283647361304233, guid: cec3df0a3b19cd33e9f79a8efc16dc5f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3822283647361304233, guid: cec3df0a3b19cd33e9f79a8efc16dc5f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3822283647361304233, guid: cec3df0a3b19cd33e9f79a8efc16dc5f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -26,15 +42,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3822283647361304233, guid: cec3df0a3b19cd33e9f79a8efc16dc5f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3822283647361304233, guid: cec3df0a3b19cd33e9f79a8efc16dc5f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3822283647361304233, guid: cec3df0a3b19cd33e9f79a8efc16dc5f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3822283647361304233, guid: cec3df0a3b19cd33e9f79a8efc16dc5f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -52,6 +68,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Circular_gen
       objectReference: {fileID: 0}
+    - target: {fileID: 7718457354172947370, guid: cec3df0a3b19cd33e9f79a8efc16dc5f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -59,6 +79,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7718457354172947370, guid: cec3df0a3b19cd33e9f79a8efc16dc5f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8685951858459871719}
+    - targetCorrespondingSourceObject: {fileID: 7718457354172947370, guid: cec3df0a3b19cd33e9f79a8efc16dc5f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3094418939350295726}
   m_SourcePrefab: {fileID: 100100000, guid: cec3df0a3b19cd33e9f79a8efc16dc5f, type: 3}
 --- !u!1 &5913108375203167019 stripped
 GameObject:
@@ -79,6 +102,62 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet_prefabs:
   - {fileID: 555490080072850097, guid: 82cd342e617dc2a6ba23870b0c643736, type: 3}
-  awaiting_time: 3
-  bullet_velocity: 1
-  bullet_count: 2
+  active: 0
+  mapBorderMultiplier: 1
+  generate_time: 0.5
+  phase_shift: 5
+  bullet_velocity: 3
+  bullet_count: 12
+  survival_time: 100
+--- !u!212 &3094418939350295726
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5913108375203167019}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: 6ea6590747aaae74db6f366c7e41dca8, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1.28, y: 1.28}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0

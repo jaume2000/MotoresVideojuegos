@@ -23,6 +23,7 @@ public class CircularPattern : BulletPattern
 
         for(int i=0; i< bullet_count; i++){
             GameObject lb = Instantiate(this.bullet_prefabs[0], transform.position, Quaternion.identity);
+            lb.transform.SetParent(Player.i.bulletStore);
             BulletGameObject bgo = lb.GetComponent<BulletGameObject>();
             //bgo.setSurvivalTIme(survival_time);
             float angle = 2*Mathf.PI/bullet_count * i + total_phase/180*Mathf.PI;

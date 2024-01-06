@@ -56,6 +56,7 @@ public class SwitchGenerators : BulletPattern
     }
 
     public override void deactivate(){
+        active_child = 0;
         base.deactivate();
         if(engine == null){Start();}
 

@@ -47,6 +47,7 @@ public class LinearPattern : BulletPattern
             }
 
             GameObject lb = Instantiate(this.bullet_prefabs[0], transform.position + rel_pos, Quaternion.identity);
+            lb.transform.SetParent(Player.i.bulletStore);
             BulletGameObject bgo = lb.GetComponent<BulletGameObject>();
             //bgo.setSurvivalTIme(survival_time);
 

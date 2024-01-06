@@ -11,6 +11,11 @@ public class Player : MonoBehaviour
     private Vector2 dir = new Vector2(0, 0);
     public static Player i;
     public static bool gameover = false;
+
+    public UnityEngine.Transform canvas;
+    public UnityEngine.Transform bulletStore;
+    public BulletPattern main_generator;
+
     public bool inmortal = false;
     public static float UPDATE_DELTA = 10f;
 
@@ -31,6 +36,7 @@ public class Player : MonoBehaviour
         GetComponent<RTDESKEntity>().MailBox = MailBox;
         my_collider = GetComponent<Collider2D>();
         i = this;
+        canvas.gameObject.SetActive(false);
     }
     
     // Start is called before the first frame update
@@ -97,17 +103,17 @@ public class Player : MonoBehaviour
     {
         Vector2 dir = Vector2.zero;
 
-        if(Input.GetKey(KeyCode.W)){
+        if(Input.GetKey(KeyCode.W) && transform.position.y < mapBorder[0].y){
             dir.y = 1;
         }
-        else if(Input.GetKey(KeyCode.S)){
+        else if(Input.GetKey(KeyCode.S) && transform.position.y > mapBorder[1].y){
             dir.y = -1;
         }
 
-        if(Input.GetKey(KeyCode.D)){
+        if(Input.GetKey(KeyCode.D) && transform.position.x < mapBorder[0].x){
             dir.x = 1;
         }
-        else if(Input.GetKey(KeyCode.A)){
+        else if(Input.GetKey(KeyCode.A)  && transform.position.x > mapBorder[1].x){
             dir.x = -1;
         }
 
@@ -116,6 +122,39 @@ public class Player : MonoBehaviour
 
     public void collided_with_bullet(){
         //Este método se llama desde BulletGameObject.cs, detecta la colisión y ejecuta este metodo.
-        gameover = true && !inmortal;
+        if(inmortal){
+            return;
+        }
+        gameover = true;
+        canvas.gameObject.SetActive(true);
+    }
+
+    public void restartGame(){
+        if(gameover){
+            gameover=false;
+
+            var main_mailbox = main_generator.GetComponent<RTDESKEntity>().MailBox;
+
+            Action Msg  = (Action)engine.PopMsg((int)UserMsgTypes.Action);
+            Msg.action = (int)UserActions.End;
+            engine.SendMsg(Msg, gameObject, main_mailbox, HRTimer.HRT_ALMOST_INMEDIATELY);
+
+            for(int i = 0; i < bulletStore.childCount; i++){
+                UnityEngine.Transform t = bulletStore.GetChild(i);
+                Destroy(t.gameObject);
+            }
+
+            Action Msg2  = (Action)engine.PopMsg((int)UserMsgTypes.Action);
+            Msg2.action = (int)UserActions.Start;
+            engine.SendMsg(Msg2, gameObject, main_mailbox, engine.ms2Ticks(3000));
+
+            Start();
+
+            canvas.gameObject.SetActive(false);
+
+            transform.position = Vector3.zero;
+            
+
+        }
     }
 }
